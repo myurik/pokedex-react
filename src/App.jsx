@@ -14,18 +14,28 @@ function getPokemonImageUrl(id) {
 
 function App() {
   const [pokemons, setPokemons] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetchPokemonList(151).then((results) => {
       setPokemons(results);
     });
   }, []);
-
+  const filteredPokemons = pokemons.filter((pokemon) =>
+    pokemon.name.includes(search.toLowerCase())
+  );
   return (
       <div>
         <h1>Pokédex</h1>
+          <input
+              type="text"
+              placeholder="Buscar Pokémon..."
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+          />
+
         <ul>
-          { pokemons.map((pokemon) => {
+          { filteredPokemons.map((pokemon) => {
             const id = getPokemonId(pokemon.url);
             const imageUrl = getPokemonImageUrl(id);
             return (
