@@ -30,7 +30,7 @@ function App() {
             const imageUrl = getPokemonImageUrl(id);
             return (
                 <li key={pokemon.name}>
-                  <img src={imageUrl} alt={pokemon.name} width="96"/>
+                  <img src={imageUrl} alt={pokemon.name} />
                   <p>{pokemon.name}</p>
                 </li>
             );
