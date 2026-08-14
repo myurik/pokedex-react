@@ -2,6 +2,16 @@ import { useState, useEffect } from "react";
 import { fetchPokemonList } from "./services/pokeapi";
 import "./App.css";
 
+function getPokemonId(url) {
+  // a url é algo como "https://pokeapi.co/api/v2/pokemon/25/"
+  const parts = url.split("/").filter(Boolean);
+  return parts[parts.length - 1]; // pega o último pedaço, que é o ID
+}
+
+function getPokemonImageUrl(id) {
+  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+}
+
 function App() {
   const [pokemons, setPokemons] = useState([]);
 
@@ -15,9 +25,16 @@ function App() {
       <div>
         <h1>Pokédex</h1>
         <ul>
-          {pokemons.map((pokemon) => (
-              <li key={pokemon.name}>{pokemon.name}</li>
-          ))}
+          { pokemons.map((pokemon) => {
+            const id = getPokemonId(pokemon.url);
+            const imageUrl = getPokemonImageUrl(id);
+            return (
+                <li key={pokemon.name}>
+                  <img src={imageUrl} alt={pokemon.name} width="96"/>
+                  <p>{pokemon.name}</p>
+                </li>
+            );
+          })}
         </ul>
       </div>
   );
