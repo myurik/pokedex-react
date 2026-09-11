@@ -42,3 +42,13 @@ jobs:
           VALIDATE_JSX: true
           VALIDATE_CSS: true
           VALIDATE_HTML: true
+
+  discord:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Discord Webhook
+        uses: sebastianpopp/discord-action@v3
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: "${{ github.repository }} - commit ${{ github.sha }} por ${{ github.actor }}"
