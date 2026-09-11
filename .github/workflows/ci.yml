@@ -51,4 +51,4 @@ jobs:
         uses: sebastianpopp/discord-action@v3
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          message: ${{ github.repository }} has been successfullly deployed.
+          message: "${{ github.repository }} - commit ${{ github.sha }} por ${{ github.actor }}"
