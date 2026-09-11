@@ -48,8 +48,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run Discord Webhook
-        uses: Sniddl/discord-commits@v1.8
+        uses: sebastianpopp/discord-action@v3
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          template: "avatar-with-link"
-          include-extras: true
+          message: ${{ github.repository }} has been successfullly deployed.
