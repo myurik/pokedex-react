@@ -44,11 +44,29 @@ jobs:
           VALIDATE_HTML: true
 
   discord:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run Discord Webhook
-        uses: sebastianpopp/discord-action@v3
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          message: "${{ github.repository }} - commit ${{ github.sha }} por ${{ github.actor }}"
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: Run Discord Webhook (Action)
+          uses: sebastianpopp/discord-action@v3
+          with:
+            webhook: ${{ secrets.DISCORD_WEBHOOK }}
+            message: "🔔 Workflow de CI iniciado"
+
+        - name: Notificar Discord com embed (curl)
+          run: |
+            curl -H "Content-Type: application/json" \
+                -d '{
+                  "embeds": [{
+                    "title": "✅ Build e testes passaram",
+                    "url": "https://github.com/${{ github.repository }}/commit/${{ github.sha }}",
+                    "description": "Repositório: **${{ github.repository }}**",
+                    "color": 5814783,
+                    "fields": [
+                      {"name": "Autor", "value": "${{ github.actor }}", "inline": true},
+                      {"name": "Commit", "value": "`${{ github.sha }}`", "inline": true}
+                    ]
+                  }]
+                }' \
+                ${{ secrets.DISCORD_WEBHOOK }}
