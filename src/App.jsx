@@ -1,16 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchPokemonList } from "./services/pokeapi";
+import { getPokemonId, getPokemonImageUrl } from "./utils/pokemon";
 import "./App.css";
-
-function getPokemonId(url) {
-  // a url é algo como "https://pokeapi.co/api/v2/pokemon/25/"
-  const parts = url.split("/").filter(Boolean);
-  return parts[parts.length - 1]; // pega o último pedaço, que é o ID
-}
-
-function getPokemonImageUrl(id) {
-  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-}
 
 function App() {
   const [pokemons, setPokemons] = useState([]);
