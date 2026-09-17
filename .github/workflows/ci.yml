@@ -39,7 +39,6 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_JAVASCRIPT_ES: true
-          VALIDATE_JSX: false
           VALIDATE_CSS: true
           VALIDATE_HTML: true
           
