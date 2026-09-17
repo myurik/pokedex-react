@@ -42,6 +42,8 @@ jobs:
           VALIDATE_JSX: true
           VALIDATE_CSS: true
           VALIDATE_HTML: true
+          JAVASCRIPT_ES_CONFIG_FILE: eslint.config.js
+          JSX_CONFIG_FILE: eslint.config.js
 
   discord:
       runs-on: ubuntu-latest
